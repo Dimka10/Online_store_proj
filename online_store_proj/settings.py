@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'applications.account',
     'applications.category',
     'applications.product',
+    'applications.order',
+    'applications.review'
 ]
 
 MIDDLEWARE = [
@@ -155,5 +157,5 @@ REST_FRAMEWORK = {
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
-AUTH_USER_MODEL = 'account.User'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

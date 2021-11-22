@@ -7,6 +7,8 @@ from applications.product.models import Product
 from applications.product.serializers import ProductSerializer
 from rest_framework.pagination import PageNumberPagination
 
+from applications.product.serializers import ProductDetailSerializer
+
 
 class ProductPriceFilter(rest_framework.FilterSet):
     min_price = rest_framework.NumberFilter(field_name='price', lookup_expr='gte')
@@ -31,3 +33,8 @@ class ProductListView(generics.ListAPIView):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+
+class ProductDetailView(generics.RetrieveAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductDetailSerializer

@@ -6,8 +6,10 @@ User = get_user_model()
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(min_length=6, write_only=True)
-    password_confirmation = serializers.CharField(min_length=6, write_only=True)
+    password = serializers.CharField(min_length=6,
+                                     write_only=True)
+    password_confirmation = serializers.CharField(min_length=6,
+                                                  write_only=True)
 
     class Meta:
         model = User
@@ -15,7 +17,8 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def validate_data(self, email):
         if User.objects.filter(email=email).exists():
-            raise serializers.ValidationError('User with this email have already taken ')
+            raise serializers.ValidationError(
+                'User with this email have already taken ')
         return email
 
     def validate(self, validated_data):
@@ -41,7 +44,9 @@ class LoginSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if email and password:
-            user = authenticate(request=self.context.get('request'), username=email, password=password)
+            user = authenticate(request=self.context.get('request'),
+                                username=email,
+                                password=password)
             if not user:
                 msg = 'Unable to log in with provided credentials.'
                 raise serializers.ValidationError(msg, code='authorization')
